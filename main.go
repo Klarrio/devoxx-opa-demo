@@ -88,6 +88,7 @@ func (s services) homeHandle(w http.ResponseWriter, r *http.Request, p httproute
 		authz, err := s.policy.eval(r.Context(), policyRequest{
 			Resource: fileToCheck,
 			Subject:  user,
+			Action:   "read",
 		})
 		if err != nil {
 			return fmt.Errorf("policy evaluation failed with unexpected error %w", err)

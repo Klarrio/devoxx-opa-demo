@@ -62,7 +62,8 @@ func watch(ctx context.Context) error {
 					return
 				}
 
-				if event.Has(fsnotify.Write) && (filepath.Ext(event.Name) == ".rego" || filepath.Ext(event.Name) == ".json") {
+				if event.Has(fsnotify.Write) &&
+					(filepath.Ext(event.Name) == ".rego" || filepath.Ext(event.Name) == ".json" || filepath.Ext(event.Name) == ".manifest") {
 					log.Println("policy modified:", event.Name)
 					log.Println("rebuild returned:", rebuild(ctx))
 				}

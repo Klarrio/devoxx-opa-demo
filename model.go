@@ -3,6 +3,7 @@ package main
 type policyRequest struct {
 	Resource file
 	Subject  user
+	Action   string
 }
 
 type page struct {
@@ -25,9 +26,8 @@ type file struct {
 }
 
 type user struct {
-	// Name            string `yaml:"Name"`
+	Name            string `yaml:"Name"`
 	Email           string `yaml:"Email"`
 	WorkingLocation string `yaml:"WorkingLocation"`
-	// EmployeeID      string `yaml:"EmployeeID"`
-	Function string `yaml:"Function"`
+	Function        string `yaml:"Function"`
 }
