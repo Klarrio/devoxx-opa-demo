@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPA demo PEP</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+    <style>
+        :root {
+            --primary-klarrio: rgb(17, 93, 122);
+            --secondary-klarrio: rgb(171, 33, 35);
+            --background-accent-klarrio: rgb(241, 241, 241);
+        }
+
+        h1 {
+            color: var(--primary-klarrio);
+        }
+
+        h2 {
+            color: var(--secondary-klarrio);
+        }
+
+        div {
+            padding: 1em;
+        }
+
+        .identity {
+            background-color: var(--background-accent-klarrio);
+        }
+
+        .identity h2 {
+            margin-top: 0;
+        }
+    </style>
+    <script>
+        // window.onload = setTimeout(window.location.reload.bind(window.location), 1000);
+    </script>
+</head>
+
+<body>
+    <h1>OPA demo</h1>
+
+    <div class="identity">
+        <h2>Identity 🪪</h2>
+        <ul>
+            {{- range $k, $v := .User }}
+            <li>
+                <strong>{{ $k }}: </strong>{{ $v }}
+            </li>
+            {{- end }}
+        </ul>
+    </div>
+
+    <div class="files">
+        <h2>List of files</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>File</th>
+                    <th>Authz</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{- range $f := .Files }}
+                <tr>
+                    <td>
+                        <ul>
+                            {{- range $k, $v := $f.File }}
+                            {{- if ne ($v | printf "%v") "" }}
+                            <li>
+                                <strong>{{ $k }}: </strong>{{ $v }}
+                            </li>
+                            {{- end }}
+                            {{- end }}
+                        </ul>
+                    </td>
+                    <td>
+                        {{- if $f.Authz }}✅{{ else }}⛔{{ end -}}
+                    </td>
+                </tr>
+                {{- end }}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

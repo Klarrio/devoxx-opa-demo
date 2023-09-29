@@ -1,0 +1,17 @@
+---
+# used by OPA SDK & standalone
+
+services:
+  pap:
+    url: http://127.0.0.1:3000
+
+bundles:
+  policy:
+    service: pap
+    resource: policy.tar.gz
+    polling:
+      min_delay_seconds: 3
+      max_delay_seconds: 3
+
+decision_logs:
+  console: true

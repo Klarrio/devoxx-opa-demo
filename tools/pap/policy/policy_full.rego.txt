@@ -1,0 +1,28 @@
+package policy
+
+import future.keywords.in
+
+default authz = false
+
+# allow staging data access for everyone
+authz {
+	input.Resource.Environment == "staging"
+}
+
+# OR
+
+# allow HR_PII for HR in same location
+authz {
+	input.Resource.Classification == "HR_PII"
+	input.Subject.Function == "HR"
+	input.Subject.WorkingLocation == input.Resource.Location
+}
+
+# OR
+
+# allow CUSTOMERS_PII in same location if whitelisted in data
+authz {
+	input.Resource.Classification == "CUSTOMERS_PII"
+	input.Subject.WorkingLocation == input.Resource.Location
+	input.Subject.Email in data.customerDataAccess
+}
