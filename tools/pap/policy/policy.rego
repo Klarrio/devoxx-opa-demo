@@ -1,6 +1,6 @@
 package policy
 
-import future.keywords.in
+import future.keywords
 
 default authz = false
 
